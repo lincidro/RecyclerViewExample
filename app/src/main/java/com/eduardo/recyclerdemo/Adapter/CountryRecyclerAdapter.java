@@ -16,7 +16,7 @@ public class CountryRecyclerAdapter extends RecyclerView.Adapter<CountryRecycler
     private LinkedList<String> countryList;
     private LayoutInflater layoutInflater;
 
-    class CountryViewHolder extends RecyclerView.ViewHolder {
+    class CountryViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public final TextView countryItemView;
         final CountryRecyclerAdapter countryAdapter;
 
@@ -24,6 +24,15 @@ public class CountryRecyclerAdapter extends RecyclerView.Adapter<CountryRecycler
             super(itemView);
             countryItemView = itemView.findViewById(R.id.country);
             this.countryAdapter = adapter;
+            countryItemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            int position = getLayoutPosition();
+            String element = countryList.get(position);
+            countryList.set(position,"Clicked "+element);
+            countryAdapter.notifyDataSetChanged();
         }
     }
 
